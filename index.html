@@ -1,11 +1,10 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
-<title>Charlottesville Region Broadband Survey</title>
-<link rel="shortcut icon" href="countyicon.png">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<title>LibreSpeed Example</title>
+<link rel="shortcut icon" href="favicon.ico">
 <script type="text/javascript" src="speedtest.js"></script>
 <script type="text/javascript">
 
@@ -20,27 +19,9 @@ s.onupdate=function(data){ //callback to update data in UI
 }
 s.onend=function(aborted){ //callback for test ended/aborted
     I("startStopBtn").className=""; //show start button again
-	
-	
-	//----------------------------------------------------------
-	//12/8/2019 - added by Damon
-	//document.getElementById("reportBroadbandBtn").innerHTML = "<a class='survey123' href='
-	//https://survey123.arcgis.com/share/66801d53b36047868426d5638cff36e1?field:AutoSpeedDownload=" + document.getElementById("dlText").innerText + "&field:AutoSpeedUpload=" +
-	//document.getElementById("ulText").innerText + "&field:CurrentInternetPing=" + document.getElementById("pingText").innerText + "&field:CurrentInternetJitter=" + //document.getElementById("jitText").innerText + "&field:CurrentInternetIP=" + document.getElementById("ip").innerText + "'>Report on Broadband Access</a>";
-	//document.getElementById("reportBroadbandBtn").style.backgroundColor = "#6060FF";
-	
-document.getElementById("reportBroadbandBtn").innerHTML = "<a class='survey123' href='https://survey123.arcgis.com/share/e3882e2617e44a4eb120bd0795a5775a?field:AutoSpeedDownload=" + document.getElementById("dlText").innerText + "&field:AutoSpeedUpload=" + document.getElementById("ulText").innerText + "&field:AutoPing=" + document.getElementById("pingText").innerText + "&field:AutoJitter=" + document.getElementById("jitText").innerText + "&field:AutoIP=" + document.getElementById("ip").innerText + "'>Report on Broadband Access</a>";
-
-	document.getElementById("reportBroadbandBtn").style.backgroundColor = "#6060FF";
-	//----------------------------------------------------------
-	//----------------------------------------------------------
-	
-	
-
-	if(aborted){ //if the test was aborted, clear the UI and prepare for new test
+    if(aborted){ //if the test was aborted, clear the UI and prepare for new test
 		initUI();
     }
-	
 }
 
 function startStop(){ //start/stop button pressed
@@ -65,6 +46,7 @@ function initUI(){
 
 function I(id){return document.getElementById(id);}
 </script>
+
 <style type="text/css">
 	html,body{
 		border:none; padding:0; margin:0;
@@ -92,7 +74,6 @@ function I(id){return document.getElementById(id);}
 		cursor:pointer;
 		box-shadow: 0 0 0 rgba(0,0,0,0.1), inset 0 0 0 rgba(0,0,0,0.1);
 	}
-
 	#startStopBtn:hover{
 		box-shadow: 0 0 2em rgba(0,0,0,0.1), inset 0 0 1em rgba(0,0,0,0.1);
 	}
@@ -103,85 +84,10 @@ function I(id){return document.getElementById(id);}
 	}
 	#startStopBtn:before{
 		content:"Start";
-	}	
+	}
 	#startStopBtn.running:before{
 		content:"Abort";
 	}
-
-	
-	
-	
-	/*-------------------------------------------------------------------------------*/
-	/* 12/8/2019 - added by Damon */
-	#reportBroadbandBtn{
-		display:inline-block;
-		margin:0 auto;
-		color:#6060AA;
-		background-color:rgba(0,0,0,0);
-		//border:0.15em solid #6060FF;
-		border-radius:0.3em;
-		transition:all 0.3s;
-		box-sizing:border-box;
-		width:18em; height:3em;
-		line-height:2.7em;
-		cursor:pointer;
-		box-shadow: 0 0 0 rgba(0,0,0,0.1), inset 0 0 0 rgba(0,0,0,0.1);
-	}
-	#reportBroadbandBtn:hover{
-		//box-shadow: 0 0 2em rgba(0,0,0,0.1), inset 0 0 1em rgba(0,0,0,0.1);
-
-	}
-	#reportBroadbandBtn a.survey123 {
-		color:#FFFFFF;
-	}	
-	#reportBroadbandBtn a.survey123:hover {
-		text-decoration:none;
-		//color:#FFFFFF;
-	}
-	/*-------------------------------------------------------------------------------*/
-	
-	#startbypassBtn{
-		display:inline-block;
-		margin:0 auto;
-		color:#6060AA;
-		background-color:rgba(0,0,0,0);
-		border:0.15em solid #6060FF;
-		border-radius:0.3em;
-		transition:all 0.3s;
-		box-sizing:border-box;
-		width:10em; height:3em;
-		line-height:2.7em;
-		cursor:pointer;
-		box-shadow: 0 0 0 rgba(0,0,0,0.1), inset 0 0 0 rgba(0,0,0,0.1);
-	}
-	#startbypassBtn:hover{
-		box-shadow: 0 0 2em rgba(0,0,0,0.1), inset 0 0 1em rgba(0,0,0,0.1);
-	}
-	#startbypassBtn:before{
-		content:"Bypass Speed Test";
-	}
-	#spanishBtn{
-		display:inline-block;
-		margin:0 auto;
-		color:#6060AA;
-		background-color:rgba(0,0,0,0);
-		border:0.15em solid #6060FF;
-		border-radius:0.3em;
-		transition:all 0.3s;
-		box-sizing:border-box;
-		width:15em; height:3em;
-		line-height:2.7em;
-		cursor:pointer;
-		box-shadow: 0 0 0 rgba(0,0,0,0.1), inset 0 0 0 rgba(0,0,0,0.1);
-	}
-	#spanishBtn:hover{
-		box-shadow: 0 0 2em rgba(0,0,0,0.1), inset 0 0 1em rgba(0,0,0,0.1);
-	}
-	#spanishBtn:before{
-		content:"Haga Clic Aquí para Español";
-	}
-
-
 	#test{
 		margin-top:2em;
 		margin-bottom:12em;
@@ -200,7 +106,7 @@ function I(id){return document.getElementById(id);}
 		font-size:1.4em;
 		z-index:9;
 	}
-	div.meterText{	
+	div.meterText{
 		position:absolute;
 		bottom:1.5em; left:0;
 		width:100%;
@@ -247,25 +153,8 @@ function I(id){return document.getElementById(id);}
 </style>
 </head>
 <body>
-<h1>Charlottesville Region Broadband Survey</h1>
-<div id="spanishBtn" onclick="javascript:window.location.href='https://virginiaequitycenter.github.io/broadband-survey/esp.html'"</div>
-</div>
-<div class="container" style="text-align:center">
-  </p>
-  <div class="jumbotron">
-    <ul>
-    <p style="font-family: 'Montserrat', sans-serif; text-align:left;">We are gathering information about internet speeds throughout the county, but we need your help!</p>
-    <p style="font-family: 'Montserrat', sans-serif; text-align:left;">If you're at the location where you'd like to report your internet access and speed, please click on the "Start" button. After the test is complete, you will need to click on the "Report on Broadband Access" button that will appear.</p>
-    <p style="font-family: 'Montserrat', sans-serif; text-align:left;">Even though we prefer you to run the speed test, if you aren't able to run the test (e.g. because you aren't at the location that you'd like to report), you can bypass the automated speed test and click on the "Bypass Speed Test" button to go directly to our brief survey where you can manually give us your internet speed information.</p>
-      </div>
-<div style="overflow:hidden">
-<div id="startStopBtn" onclick="startStop()"></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<div id="startbypassBtn" onclick="javascript:window.location.href='https://survey123.arcgis.com/share/e3882e2617e44a4eb120bd0795a5775a'"></div>
-</div>
-	<!-- 12/8/2019 - added by Damon -->
-	<div id="spacer"><br /><br /></div>
-	<div id="reportBroadbandBtn"><a class="survey123"></a></div>
-	<!--                            -->
+<h1>LibreSpeed Example</h1>
+<div id="startStopBtn" onclick="startStop()"></div>
 <div id="test">
 	<div class="testGroup">
 		<div class="testArea">
@@ -294,18 +183,8 @@ function I(id){return document.getElementById(id);}
 	<div id="ipArea">
 		IP Address: <span id="ip"></span>
 	</div>
-    
-    <p><img src="/countylogo.png" alt="Albemarle County Logo" align="middle"></p>
-	
-	
-	<!-- 12/8/2019 - added by Damon -->
-	<div id="spacer"><br /><br /></div>
-	<div id="reportBroadbandBtn"><a class="survey123"></a></div>
-	<!--                            -->
-	
-	
 </div>
-
+<a href="https://github.com/librespeed/speedtest">Source code</a>
 <script type="text/javascript">
     initUI();
 </script>
