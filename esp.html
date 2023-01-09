@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+<title>Albemarle County Broadband Survey</title>
+<link rel="shortcut icon" href="countyicon.png">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script type="text/javascript" src="assets/js/speedtest.js"></script>
+<script type="text/javascript">
+
+//INITIALIZE SPEEDTEST
+var s=new Speedtest(); //create speedtest object
+s.onupdate=function(data){ //callback to update data in UI
+    I("ip").textContent=data.clientIp;
+    I("dlText").textContent=(data.testState==1&&data.dlStatus==0)?"...":data.dlStatus;
+    I("ulText").textContent=(data.testState==3&&data.ulStatus==0)?"...":data.ulStatus;
+    I("pingText").textContent=data.pingStatus;
+    I("jitText").textContent=data.jitterStatus;
+}
+s.onend=function(aborted){ //callback for test ended/aborted
+    I("startStopBtn").className=""; //show start button again
+	
+	
+	//----------------------------------------------------------
+	//12/8/2019 - added by Damon
+	//document.getElementById("reportBroadbandBtn").innerHTML = "<a class='survey123' href='
+	//https://survey123.arcgis.com/share/66801d53b36047868426d5638cff36e1?field:AutoSpeedDownload=" + document.getElementById("dlText").innerText + "&field:AutoSpeedUpload=" +
+	//document.getElementById("ulText").innerText + "&field:CurrentInternetPing=" + document.getElementById("pingText").innerText + "&field:CurrentInternetJitter=" + //document.getElementById("jitText").innerText + "&field:CurrentInternetIP=" + document.getElementById("ip").innerText + "'>Report on Broadband Access</a>";
+	//document.getElementById("reportBroadbandBtn").style.backgroundColor = "#6060FF";
+	
+document.getElementById("reportBroadbandBtn").innerHTML = "<a class='survey123' href='https://survey123.arcgis.com/share/e3882e2617e44a4eb120bd0795a5775a?field:AutoSpeedDownload=" + document.getElementById("dlText").innerText + "&field:AutoSpeedUpload=" + document.getElementById("ulText").innerText + "&field:AutoPing=" + document.getElementById("pingText").innerText + "&field:AutoJitter=" + document.getElementById("jitText").innerText + "&field:AutoIP=" + document.getElementById("ip").innerText + "'>Reportar Acceso de Banda Ancha</a>";
+
+	document.getElementById("reportBroadbandBtn").style.backgroundColor = "#6060FF";
+	//----------------------------------------------------------
+	//----------------------------------------------------------
+	
+	
+
+	if(aborted){ //if the test was aborted, clear the UI and prepare for new test
+		initUI();
+    }
+	
+}
+
+function startStop(){ //start/stop button pressed
+	if(s.getState()==3){
+		//speedtest is running, abort
+		s.abort();
+	}else{
+		//test is not running, begin
+		s.start();
+		I("startStopBtn").className="running";
+	}
+}
+
+//function to (re)initialize UI
+function initUI(){
+	I("dlText").textContent="";
+	I("ulText").textContent="";
+	I("pingText").textContent="";
+	I("jitText").textContent="";
+	I("ip").textContent="";	
+}
+
+function I(id){return document.getElementById(id);}
+</script>
+<style type="text/css">
+	html,body{
+		border:none; padding:0; margin:0;
+		background:#FFFFFF;
+		color:#202020;
+	}
+	body{
+		text-align:center;
+		font-family:"Roboto",sans-serif;
+	}
+	h1{
+		color:#404040;
+	}
+	#startStopBtn{
+		display:inline-block;
+		margin:0 auto;
+		color:#6060AA;
+		background-color:rgba(0,0,0,0);
+		border:0.15em solid #6060FF;
+		border-radius:0.3em;
+		transition:all 0.3s;
+		box-sizing:border-box;
+		width:8em; height:3em;
+		line-height:2.7em;
+		cursor:pointer;
+		box-shadow: 0 0 0 rgba(0,0,0,0.1), inset 0 0 0 rgba(0,0,0,0.1);
+	}
+	
+	#startStopBtn:hover{
+		box-shadow: 0 0 2em rgba(0,0,0,0.1), inset 0 0 1em rgba(0,0,0,0.1);
+	}
+	#startStopBtn.running{
+		background-color:#FF3030;
+		border-color:#FF6060;
+		color:#FFFFFF;
+	}
+	#startStopBtn:before{
+		content:"Iniciar";
+	}
+	
+	#startStopBtn.running:before{
+		content:"Parar Prueba";
+	}
+
+	
+	
+	
+	/*-------------------------------------------------------------------------------*/
+	/* 12/8/2019 - added by Damon */
+	#reportBroadbandBtn{
+		display:inline-block;
+		margin:0 auto;
+		color:#6060AA;
+		background-color:rgba(0,0,0,0);
+		//border:0.15em solid #6060FF;
+		border-radius:0.3em;
+		transition:all 0.3s;
+		box-sizing:border-box;
+		width:18em; height:3em;
+		line-height:2.7em;
+		cursor:pointer;
+		box-shadow: 0 0 0 rgba(0,0,0,0.1), inset 0 0 0 rgba(0,0,0,0.1);
+	}
+	#reportBroadbandBtn:hover{
+		//box-shadow: 0 0 2em rgba(0,0,0,0.1), inset 0 0 1em rgba(0,0,0,0.1);
+
+	}
+	#reportBroadbandBtn a.survey123 {
+		color:#FFFFFF;
+	}	
+	#reportBroadbandBtn a.survey123:hover {
+		text-decoration:none;
+		//color:#FFFFFF;
+	}
+	/*-------------------------------------------------------------------------------*/
+	
+	#startbypassBtn{
+		display:inline-block;
+		margin:0 auto;
+		color:#6060AA;
+		background-color:rgba(0,0,0,0);
+		border:0.15em solid #6060FF;
+		border-radius:0.3em;
+		transition:all 0.3s;
+		box-sizing:border-box;
+		width:10em; height:3em;
+		line-height:2.7em;
+		cursor:pointer;
+		box-shadow: 0 0 0 rgba(0,0,0,0.1), inset 0 0 0 rgba(0,0,0,0.1);
+	}
+	#startbypassBtn:hover{
+		box-shadow: 0 0 2em rgba(0,0,0,0.1), inset 0 0 1em rgba(0,0,0,0.1);
+	}
+	#startbypassBtn:before{
+		content:"Omitir Prueba";
+	}
+	#spanishBtn{
+		display:inline-block;
+		margin:0 auto;
+		color:#6060AA;
+		background-color:rgba(0,0,0,0);
+		border:0.15em solid #6060FF;
+		border-radius:0.3em;
+		transition:all 0.3s;
+		box-sizing:border-box;
+		width:15em; height:3em;
+		line-height:2.7em;
+		cursor:pointer;
+		box-shadow: 0 0 0 rgba(0,0,0,0.1), inset 0 0 0 rgba(0,0,0,0.1);
+	}
+	#spanishBtn:hover{
+		box-shadow: 0 0 2em rgba(0,0,0,0.1), inset 0 0 1em rgba(0,0,0,0.1);
+	}
+	#spanishBtn:before{
+		content:"Click Here for English";
+	}
+
+
+	#test{
+		margin-top:2em;
+		margin-bottom:12em;
+	}
+	div.testArea{
+		display:inline-block;
+		width:14em;
+		height:9em;
+		position:relative;
+		box-sizing:border-box;
+	}
+	div.testName{
+		position:absolute;
+		top:0.1em; left:0;
+		width:100%;
+		font-size:1.4em;
+		z-index:9;
+	}
+	div.meterText{	
+		position:absolute;
+		bottom:1.5em; left:0;
+		width:100%;
+		font-size:2.5em;
+		z-index:9;
+	}
+	#dlText{
+		color:#6060AA;
+	}
+	#ulText{
+		color:#309030;
+	}
+	#pingText,#jitText{
+		color:#AA6060;
+	}
+	div.meterText:empty:before{
+		color:#505050 !important;
+		content:"0.00";
+	}
+	div.unit{
+		position:absolute;
+		bottom:2em; left:0;
+		width:100%;
+		z-index:9;
+	}
+	div.testGroup{
+		display:inline-block;
+	}
+	@media all and (max-width:65em){
+		body{
+			font-size:1.5vw;
+		}
+	}
+	@media all and (max-width:40em){
+		body{
+			font-size:0.8em;
+		}
+		div.testGroup{
+			display:block;
+			margin: 0 auto;
+		}
+	}
+
+</style>
+</head>
+<body>
+<h1>Albemarle County Broadband Survey</h1>
+<div id="spanishBtn" onclick="javascript:window.location.href='https://virginiaequitycenter.github.io/broadband-survey'"</div>
+</div>
+<div class="container" style="text-align:center">
+  </p>
+  <div class="jumbotron">
+    <ul>
+    <p style="font-family: 'Montserrat', sans-serif; text-align:left;">Estamos recopilando información sobre las velocidades de Internet en todo el condado, ¡pero necesitamos su ayuda!</p>
+    <p style="font-family: 'Montserrat', sans-serif; text-align:left;">Si se encuentra en el lugar donde desea informar su velocidad y acceso a Internet, haga clic en el botón "Iniciar". Una vez completada la prueba, deberá hacer clic en el botón "Informar sobre acceso a banda ancha" que aparecerá.</p>
+    <p style="font-family: 'Montserrat', sans-serif; text-align:left;">Aunque preferimos que ejecute la prueba de velocidad, si no puede ejecutar la prueba (por ejemplo, porque no está en la ubicación que le gustaría informar), puede omitir la prueba de velocidad automatizada y hacer clic en el botón "Omitir Prueba" para ir directamente a nuestra breve encuesta donde puede proporcionarnos manualmente su información de velocidad de Internet.</p>
+      </div>
+<div style="overflow:hidden">
+<div id="startStopBtn" onclick="startStop()"></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div id="startbypassBtn" onclick="javascript:window.location.href='https://survey123.arcgis.com/share/e3882e2617e44a4eb120bd0795a5775a'"></div>
+</div>
+	<!-- 12/8/2019 - added by Damon -->
+	<div id="spacer"><br /><br /></div>
+	<div id="reportBroadbandBtn"><a class="survey123"></a></div>
+	<!--                            -->
+<div id="test">
+	<div class="testGroup">
+		<div class="testArea">
+			<div class="testName">Download</div>
+			<div id="dlText" class="meterText"></div>
+			<div class="unit">Mbps</div>
+		</div>
+		<div class="testArea">
+			<div class="testName">Upload</div>
+			<div id="ulText" class="meterText"></div>
+			<div class="unit">Mbps</div>
+		</div>
+	</div>
+	<div class="testGroup">
+		<div class="testArea">
+			<div class="testName">Ping</div>
+			<div id="pingText" class="meterText"></div>
+			<div class="unit">ms</div>
+		</div>
+		<div class="testArea">
+			<div class="testName">Jitter</div>
+			<div id="jitText" class="meterText"></div>
+			<div class="unit">ms</div>
+		</div>
+	</div>
+	<div id="ipArea">
+		IP Address: <span id="ip"></span>
+	</div>
+    <p><img src="/countylogo.png" alt="Albemarle County Logo" align="middle"></p>
+	
+	
+</div>
+
+<script type="text/javascript">
+    initUI();
+</script>
+</body>
+</html>
